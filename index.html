@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RJ45 PRO Lab — T568A/T568B • Directo/Cruzado • Pares</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PRO</div>
+      <div class="brand-text">
+        <h1>RJ45 PRO Lab</h1>
+        <p>Aprende T568A/T568B + Cable directo/crossover + Pares (1-2, 3-6, 4-5, 7-8)</p>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <div class="pill">
+        <span class="label">Modo de cable</span>
+        <div class="segmented" role="tablist" aria-label="Seleccionar modo de cable">
+          <button id="btnStraight" class="seg-btn" type="button">Directo</button>
+          <button id="btnCrossover" class="seg-btn" type="button">Cruzado</button>
+        </div>
+      </div>
+
+      <div class="pill">
+        <span class="label">Estándar</span>
+        <div class="segmented" role="tablist" aria-label="Seleccionar estándar">
+          <button id="btnStdA" class="seg-btn" type="button">T568A</button>
+          <button id="btnStdB" class="seg-btn" type="button">T568B</button>
+        </div>
+      </div>
+
+      <div class="pill">
+        <span class="label">Dificultad</span>
+        <select id="difficulty" class="select">
+          <option value="1">Nivel 1 — Tutorial (pistas)</option>
+          <option value="2">Nivel 2 — Práctica</option>
+          <option value="3">Nivel 3 — Rápido (sin nombres)</option>
+          <option value="4">Nivel 4 — Examen (sin ayudas)</option>
+        </select>
+      </div>
+
+      <div class="pill mono">
+        <span class="label">Tiempo</span>
+        <span id="time">00:00</span>
+      </div>
+
+      <button id="btnReset" class="btn ghost" type="button">Reiniciar</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <div class="card-head">
+        <h2>Laboratorio interactivo</h2>
+        <p class="muted">
+          Vista de referencia: <b>clip abajo</b> y <b>pines hacia ti</b>. Arrastra cables a los pines 1–8.
+          En <b>Cruzado</b> se habilita el segundo conector (Extremo B).
+        </p>
+      </div>
+
+      <div class="lab">
+        <!-- LEFT: Trainers -->
+        <div class="trainers">
+          <div class="trainer-card">
+            <div class="trainer-head">
+              <h3>Extremo A</h3>
+              <p class="muted" id="labelA">Estándar: T568B</p>
+            </div>
+
+            <div class="rj45" id="rjA" aria-label="Conector RJ45 Extremo A">
+              <div class="rj-top">
+                <div class="win"></div><div class="win small"></div>
+              </div>
+
+              <div class="pins">
+                <div class="pin-head-row" aria-hidden="true">
+                  <div class="pin-head">1</div><div class="pin-head">2</div><div class="pin-head">3</div><div class="pin-head">4</div>
+                  <div class="pin-head">5</div><div class="pin-head">6</div><div class="pin-head">7</div><div class="pin-head">8</div>
+                </div>
+                <div class="slot-row">
+                  <div class="slot" data-end="A" data-slot="1"></div>
+                  <div class="slot" data-end="A" data-slot="2"></div>
+                  <div class="slot" data-end="A" data-slot="3"></div>
+                  <div class="slot" data-end="A" data-slot="4"></div>
+                  <div class="slot" data-end="A" data-slot="5"></div>
+                  <div class="slot" data-end="A" data-slot="6"></div>
+                  <div class="slot" data-end="A" data-slot="7"></div>
+                  <div class="slot" data-end="A" data-slot="8"></div>
+                </div>
+              </div>
+
+              <div class="clip"><span>CLIP</span></div>
+            </div>
+          </div>
+
+          <div class="trainer-card" id="panelB">
+            <div class="trainer-head">
+              <h3>Extremo B</h3>
+              <p class="muted" id="labelB">Estándar: T568B</p>
+            </div>
+
+            <div class="rj45" id="rjB" aria-label="Conector RJ45 Extremo B">
+              <div class="rj-top">
+                <div class="win"></div><div class="win small"></div>
+              </div>
+
+              <div class="pins">
+                <div class="pin-head-row" aria-hidden="true">
+                  <div class="pin-head">1</div><div class="pin-head">2</div><div class="pin-head">3</div><div class="pin-head">4</div>
+                  <div class="pin-head">5</div><div class="pin-head">6</div><div class="pin-head">7</div><div class="pin-head">8</div>
+                </div>
+                <div class="slot-row">
+                  <div class="slot" data-end="B" data-slot="1"></div>
+                  <div class="slot" data-end="B" data-slot="2"></div>
+                  <div class="slot" data-end="B" data-slot="3"></div>
+                  <div class="slot" data-end="B" data-slot="4"></div>
+                  <div class="slot" data-end="B" data-slot="5"></div>
+                  <div class="slot" data-end="B" data-slot="6"></div>
+                  <div class="slot" data-end="B" data-slot="7"></div>
+                  <div class="slot" data-end="B" data-slot="8"></div>
+                </div>
+              </div>
+
+              <div class="clip"><span>CLIP</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Palette + Actions -->
+        <aside class="side">
+          <div class="mini">
+            <h3 id="missionTitle">Misión</h3>
+            <p class="muted" id="missionText"></p>
+
+            <div class="stats">
+              <div class="stat"><span class="k">Puntaje</span><span class="v" id="score">0</span></div>
+              <div class="stat"><span class="k">Racha</span><span class="v" id="streak">0</span></div>
+              <div class="stat"><span class="k">Intentos</span><span class="v" id="attempts">0</span></div>
+              <div class="stat"><span class="k">Máx. intentos</span><span class="v" id="maxAttempts">∞</span></div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <div class="row">
+              <h3>Cables</h3>
+              <div class="toggles">
+                <label class="toggle">
+                  <input id="toggleSounds" type="checkbox" checked />
+                  <span>Sonidos</span>
+                </label>
+                <label class="toggle">
+                  <input id="togglePairTest" type="checkbox" checked />
+                  <span>Validar pares</span>
+                </label>
+              </div>
+            </div>
+            <p class="muted">Arrastra cables a pines. Puedes reordenar. Suelta en “Paleta” para regresar.</p>
+            <div class="palette">
+              <div class="palette-col">
+                <div class="palette-head">
+                  <span class="mono">Paleta A</span>
+                  <span class="muted small">8 cables</span>
+                </div>
+                <div id="wiresA" class="wires" aria-label="Cables para Extremo A"></div>
+              </div>
+
+              <div class="palette-col" id="paletteBCol">
+                <div class="palette-head">
+                  <span class="mono">Paleta B</span>
+                  <span class="muted small">8 cables</span>
+                </div>
+                <div id="wiresB" class="wires" aria-label="Cables para Extremo B"></div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button id="btnCheck" class="btn primary" type="button">Verificar</button>
+              <button id="btnHint" class="btn" type="button">Pista</button>
+              <button id="btnShow" class="btn" type="button">Mostrar respuesta</button>
+            </div>
+
+            <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Referencia</h2>
+        <p class="muted">
+          Orden oficial (clip abajo, pines hacia ti). En “Directo”, ambos extremos iguales. En “Cruzado”, A y B van diferentes (A↔B).
+        </p>
+      </div>
+
+      <div class="ref-grid">
+        <div class="ref">
+          <h3>T568A</h3>
+          <ol id="refA" class="ref-order"></ol>
+        </div>
+        <div class="ref">
+          <h3>T568B</h3>
+          <ol id="refB" class="ref-order"></ol>
+        </div>
+        <div class="ref">
+          <h3>Pares Ethernet (10/100/1000)</h3>
+          <ul class="muted pair-list">
+            <li><b>Par 1:</b> pines 1–2</li>
+            <li><b>Par 2:</b> pines 3–6</li>
+            <li><b>Par 3:</b> pines 4–5</li>
+            <li><b>Par 4:</b> pines 7–8</li>
+          </ul>
+          <p class="muted small">
+            En 10/100 se usan principalmente 1–2 y 3–6; en 1000 (Gigabit) se usan los 4 pares.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer muted">
+      Consejo: para entregar “todo”, puedes explicar: estándares (A/B), tipos de cable (directo/cruzado) y pares (tester).
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
